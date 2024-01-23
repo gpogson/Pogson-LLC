@@ -1,0 +1,199 @@
+body {
+    background-color: #FFF6F4; /* Dark background color */
+  }
+
+  .header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, ); /* Adjust the opacity (0.5 = 50% darkness) */
+    z-index: 2; /* Ensure the header overlay is above the hero image */
+  }
+  
+
+  .stock-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    align-items: center;
+    float:left;
+  }
+  .percent{
+    float:right;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Rubik', sans-serif;
+    background-color: #2D4642; /* Cream background */
+  }
+  
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .dashboard-header {
+    background-color: #add8e6; /* Light blue background */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .dashboard-title {
+    font-size: 1.5em;
+  }
+  
+  .dashboard-about {
+    font-size: 1em;
+  }
+  
+  .content {
+    display: flex;
+    flex-grow: 1;
+  }
+  
+  .chart-container {
+    flex-grow: 2;
+    padding: 20px;
+  }
+  
+  .stock-info {
+    flex-grow: 1;
+    background-color: #2D4642; /* Lighter shade for the info panel */
+    border-left: 2px solid #2D4642; /* Separator for the panel */
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .stock-info h2 {
+    margin-top: 0;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .content {
+      flex-direction: column;
+    }
+  
+    .stock-info {
+      border-left: none;
+      border-top: 2px solid #d1d1d1;
+      padding-top: 10px;
+    }
+  }
+/* Time Range Selector Styling */
+.time-range-selector {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.time-range-selector label {
+  margin-right: 5px;
+}
+
+.time-range-selector select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+  
+/* Link css*/
+a {
+  text-decoration: none; /* Remove underlines */
+  color: inherit; /* Inherit text color from parent */
+}
+
+/* Style visited links (optional) */
+a:visited {
+  color: inherit; /* Inherit text color from parent for visited links */
+}
+
+/* headshot*/
+.headshot {
+  width: 200px; /* Adjust the width as needed */
+  height: auto; /* To maintain aspect ratio */
+}
+
+hr.title {
+	border-top: 3px double #8c8b8b;
+}
+
+/* HERO IMAGE */
+.hero-overlay {
+  position: relative;
+  height: 100%; /* Adjust the height as needed */
+  overflow: hidden;
+}
+
+.hero-overlay img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/*search bar*/
+.centered-search-bar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0); /* Adjust opacity here */
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 2;
+}
+
+.centered-search-bar input.form-control {
+  background-color: rgba(255, 255, 255, 0.7); /* Input field background opacity */
+  /* ... other input field styles ... */
+}
+
+
+/* Add a semi-transparent overlay */
+.hero-overlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Adjust opacity (0.5 = 50% darkness) */
+  z-index: 1; /* Ensure the overlay is above the image */
+}
+
+
+#logo {
+  position: absolute;
+  top: 15px; /* Adjust the top position as needed */
+  left: 50%; /* Center the logo horizontally */
+  transform: translateX(-50%); /* Center the logo horizontally */
+  z-index: 2; /* Logo is in front of the hero image */
+  width: 350px;
+}
+
+
+/* img buttons */
+.image-button {
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s;
+  z-index: 3;
+}
+
+.image-button:hover {
+  transform: translateY(-10px);
+}
+
+.button-image {
+  width: 100%;
+  height: auto;
+}

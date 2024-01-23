@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Your Website</title>
+    <div class="custom-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+              <a href="homepage.html"><h3>Home</h3></a>
+          </div>
+          <div class="col-md-4 text-center">
+          </div>
+          <div class="col-md-4 text-right">
+              <a href="dashboard.html"><h3>Dashboard</h3></a>
+          </div>
+        </div>
+      </div>
+     </div>
+  </head>
+<body>
+    <div class="stock-container"></div> 
+      <div class="custom-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="chart-container">
+                <h3 id="stockTitle">Apple</h3>
+                <canvas id="Chart"></canvas>
+                <div class="time-range-selector d-flex justify-content-end mb-3">
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="timeRangeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Select Time Range
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="timeRangeDropdown">
+                      <a class="dropdown-item" href="#" data-range="1M">1 Month</a>
+                      <a class="dropdown-item" href="#" data-range="3M">3 Months</a>
+                      <a class="dropdown-item" href="#" data-range="6M">6 Months</a>
+                      <a class="dropdown-item" href="#" data-range="1Y">1 Year</a>
+                      <a class="dropdown-item" href="#" data-range="5Y">5 Years</a>
+                      <a class="dropdown-item" href="#" data-range="MAX">Max</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="stock-info">
+                <h3>Stock Information</h3>
+                <h4>Recent News:</h4>
+                <ul id="newsList"></ul>
+              </div>
+              
+            </div>
+          </div>
+      </div>
+
+
+
+<!-- Your page content goes here -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./dashboard.js"></script>
+
+</body>
+</html>
