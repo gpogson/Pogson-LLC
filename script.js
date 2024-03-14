@@ -18,31 +18,36 @@ const getStockHistoricalData = async (ticker, timeFrame) => {
   console.log("our frame:" + timeFrame);
   // Calculate the fromDate based on the selected time frame
   let fromDate;
+  let monthChange = 0;
+  let yearChange = 0;
+  let flag = true;
   switch (timeFrame) {
     case '1 Month':
-      fromDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, currentDate.getDate());
+      monthChange = 1;
       break;
     case '3 Months':
-      fromDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 3, currentDate.getDate());
+      monthChange = 3;
       break;
     case '6 Months':
-      fromDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 6, currentDate.getDate());
-      console.log(fromDate);
+      monthChange = 6;
       break;
     case '1 Year':
-      fromDate = new Date(currentDate.getFullYear() - 1, currentDate.getMonth(), currentDate.getDate());
+      yearChange = 1;
       break;
     case '5 Years':
-      fromDate = new Date(currentDate.getFullYear() - 5, currentDate.getMonth(), currentDate.getDate());
+      yearChange = 5;
       break;
     case 'Max':
       // Set a maximum date range, e.g., 10 years ago
-      fromDate = new Date(currentDate.getFullYear() - 10, currentDate.getMonth(), currentDate.getDate());
+      yearChange = 10;
       break;
     default:
-      // Default to the provided time frame or '1Y' if not recognized
+    
       fromDate = new Date(currentDate.getFullYear() - (parseInt(timeFrame) || 1), currentDate.getMonth(), currentDate.getDate());
       break;
+  }
+  if (yearChange != 0 || monthChange != 0) {
+    fromDate = new Date(currentDate.getFullYear() - yearChange, currentDate.getMonth() - monthChange, currentDate.getDate());
   }
 
   // Format the fromDate to YYYY-MM-DD

@@ -32,7 +32,6 @@ const getStockHistoricalData = async (ticker, timeFrame) => {
       break;
     case '6 Months':
       fromDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 6, currentDate.getDate());
-      console.log(fromDate);
       break;
     case '1 Year':
       fromDate = new Date(currentDate.getFullYear() - 1, currentDate.getMonth(), currentDate.getDate());
@@ -42,7 +41,7 @@ const getStockHistoricalData = async (ticker, timeFrame) => {
       break;
     case 'Max':
       // Set a maximum date range, e.g., 10 years ago
-      fromDate = new Date(currentDate.getFullYear() - 10, currentDate.getMonth(), currentDate.getDate());
+      fromDate = new Date(currentDate.getFullYear() - 20, currentDate.getMonth(), currentDate.getDate());
       break;
     default:
       // Default to the provided time frame or '1Y' if not recognized
@@ -55,14 +54,79 @@ const getStockHistoricalData = async (ticker, timeFrame) => {
 
   // Construct the API URL with the new fromDate
   const response = await fetch(`https://financialmodelingprep.com/api/v3/historical-price-full/${ticker}?apikey=${stockApiKey}&from=${formattedDate}`);
-  const data = await response.json();
-  return data.historical;
+  const responseData = await response.json();
+
+  // Extract the historical data from the API response
+  const historicalData = responseData.historical;
+
+  // Ensure historicalData is an array of objects with 'date' and 'close' properties
+  if (!Array.isArray(historicalData) || historicalData.length === 0 || !historicalData[0].date || !historicalData[0].close) {
+    throw new Error('Invalid historical data format');
+  }
+
+  return historicalData;
 };
 
 
 
 
-// Display stock chart
+const fetchIncomeStmtMetric = async (ticker, metric) => {
+  try {
+    const response = await fetch(`https://financialmodelingprep.com/api/v3/financials/income-statement/${ticker}?apikey=${stockApiKey}`);
+    const data = await response.json();
+    console.log(data);
+    if (data.financials && data.financials.length > 0) {
+      const value = data.financials[0][metric];
+      return value;
+    } else {
+      console.error(`Unable to fetch ${metric} data for the company.`);
+      return null;
+    }
+  } catch (error) {
+    console.error(`Error fetching ${metric} data:`, error);
+    return null;
+  }
+};
+
+const fetchProfileMetric = async (ticker, metric) => {
+  try {
+    const response = await fetch(`https://financialmodelingprep.com/api/v3/profile/${ticker}?apikey=${stockApiKey}`);
+    const data = await response.json();
+    console.log("profile data", data);
+    if (data) {
+      const value = data[0][metric];
+      return value;
+    } else {
+      console.error(`Unable to fetch ${metric} data for the company.`);
+      return null;
+    }
+  } catch (error) {
+    console.error(`Error fetching ${metric} data:`, error);
+    return null;
+  }
+};
+
+const fetchAndDisplayValue = async (ticker,  metric, id, type) => {
+  let value;
+  if  (type == 'incomeStmt')  {
+    value = await fetchIncomeStmtMetric(ticker, metric);
+  }
+  else{
+    value = await fetchProfileMetric(ticker, metric);
+  }
+  const htmlElement = document.getElementById(id);
+  if (htmlElement && value !== null) {
+    console.log("value: "+ value)
+    htmlElement.textContent = `${htmlElement.textContent} ${parseFloat (value).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}`;
+  }
+};
+
+  // Fetch and display stats
+  fetchAndDisplayValue(ticker, 'Revenue', 'revenue', 'incomeStmt');
+  fetchAndDisplayValue(ticker, 'EPS', 'eps', 'incomeStmt');
+  fetchAndDisplayValue(ticker, 'mktCap', 'marketCap', 'profile');
+
+// Separate function for displaying stock chart
 async function displayStockChart(ticker, timeFrame) {
   const historicalData = await getStockHistoricalData(ticker, timeFrame);
 
@@ -76,12 +140,32 @@ async function displayStockChart(ticker, timeFrame) {
     window.stockChart.destroy();
   }
 
+  // percent change
+  const startPrice = prices[0];
+  const endPrice = prices[prices.length - 1];
+  const percentChange = ((endPrice - startPrice) / startPrice) * 100;
+
+  // Update the percent change element with color based on positive or negative change
+  const percentChangeElement = document.getElementById('percentChange');
+  percentChangeElement.textContent = `Percent Change: `;
+  const percentChangeNumber = document.createElement('span');
+  percentChangeNumber.textContent = `${percentChange.toFixed(2)}%`;
+  percentChangeElement.appendChild(percentChangeNumber);
+
+  if (percentChange < 0) {
+    percentChangeNumber.style.color = 'red';
+  } else if (percentChange > 0) {
+    percentChangeNumber.style.color = 'green';
+  }
+
+
+  // Create the chart
   window.stockChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: dates,
       datasets: [{
-        label: 'Stock Price Over One Year',
+        label: 'Stock Price',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 2,
         data: prices,
@@ -91,25 +175,24 @@ async function displayStockChart(ticker, timeFrame) {
       scales: {
         x: {
           ticks: {
-            color: 'white', // Change the color of the dates
+            color: 'rgba(75, 192, 192, 1)', // Change the color of the dates
           },
         },
         y: {
           ticks: {
-            color: 'white', // Change the color of the left-side y-axis labels
+            color: 'rgba(75, 192, 192, 1)', // Change the color of the left-side y-axis labels
           },
         },
       },
       plugins: {
         legend: {
           labels: {
-            color: 'white', // Change the color of the label text
+            color: 'rgba(75, 192, 192, 1)', // Change the color of the label text
           },
         },
       },
     },
   });
-  
 }
 
 
@@ -144,6 +227,21 @@ async function fetchRecentNews(ticker) {
   newsList.innerHTML = ''; // Clear previous news items
 
   try {
+    fetch(`https://financialmodelingprep.com/api/v3/profile/${ticker}?apikey=${stockApiKey}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data && data.length > 0) {
+        const companyName = data[0].companyName;
+        console.log('Company Name:', companyName);
+        ticker = companyName;
+      } else {
+        console.log('No data available for the specified ticker symbol.');
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching company profile:', error);
+    });
+    
     const response = await fetch(`https://newsapi.org/v2/everything?q=${ticker}&apiKey=${newsApiKey}`);
     const data = await response.json();
 
@@ -165,6 +263,75 @@ async function fetchRecentNews(ticker) {
     }
   } catch (error) {
     console.error('Error fetching news:', error);
+  }
+}
+
+
+const doc = document.getElementById('Chart').getContext('2d');
+// Add event listener to the chart for click events
+// Add event listener to the chart for click events
+// Add event listener to the chart for click events
+// Assuming historicalData is available and properly fetched
+doc.canvas.addEventListener('click', async function(event) {
+  const historicalData = await getStockHistoricalData(ticker, 'Max');
+  const prices = historicalData.map(entry => entry.close); // Don't reverse prices here
+  const dates = historicalData.map(entry => entry.date); // Don't reverse dates here
+  
+  const activePoints = window.stockChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, false);
+  if (activePoints.length === 0) return; // No point clicked
+  
+  const clickedIndex = activePoints[0].index;
+  
+  // Find the price corresponding to the clicked index
+  const clickedPrice = prices[clickedIndex]; // Use clickedIndex directly to get the correct price
+  const clickedDate = dates[clickedIndex];
+  
+  // Store clicked date or use it to calculate percent change with previously stored date
+  if (!window.clickedDate) {
+    window.clickedDate = clickedDate;
+    
+  } else {
+    const startDate = window.clickedDate;
+    const endDate = clickedDate;
+    console.log("startDate" + startDate);
+    console.log("endDate" + endDate);
+    const startIndex = dates.indexOf(startDate);
+    const endIndex = dates.indexOf(endDate);
+    
+    if (startIndex === -1 || endIndex === -1) {
+      alert('Error: Dates not found in data.');
+      return;
+    }
+    
+    const startPrice = prices[startIndex];
+    const endPrice = clickedPrice; // Use clickedPrice as the end price
+    const percentChange = ((endPrice - startPrice) / startPrice) * 100;
+    
+    console.log("startPrice: " + startPrice);
+    console.log("endPrice: " + endPrice);
+    console.log("percentChange: " + percentChange);
+    
+    updatePercentChange(percentChange);
+    window.clickedDate = null; // Reset clicked date for next selection
+  }
+});
+
+
+
+
+// Function to update the percent change element with color based on positive or negative change
+function updatePercentChange(percentChange) {
+  const percentChangeElement = document.getElementById('percentChange');
+  percentChangeElement.textContent = `Percent Change: `;
+  const percentChangeNumber = document.createElement('span');
+  percentChangeNumber.textContent = `${percentChange.toFixed(2)}%`;
+  percentChangeElement.appendChild(percentChangeNumber);
+  
+  // Set color based on positive or negative change
+  if (percentChange < 0) {
+    percentChangeNumber.style.color = 'red';
+  } else if (percentChange > 0) {
+    percentChangeNumber.style.color = 'green';
   }
 }
 

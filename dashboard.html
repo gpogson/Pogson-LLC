@@ -29,23 +29,26 @@
           <div class="row">
             <div class="col-sm-8">
               <div class="chart-container">
-                <h3 id="stockTitle">Apple</h3>
+                <h3 id="stockTitle" style="position: flex">Apple</h3> 
                 <canvas id="Chart"></canvas>
-                <div class="time-range-selector d-flex justify-content-end mb-3">
-                  <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="timeRangeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Select Time Range
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="timeRangeDropdown">
-                      <a class="dropdown-item" href="#" data-range="1M">1 Month</a>
-                      <a class="dropdown-item" href="#" data-range="3M">3 Months</a>
-                      <a class="dropdown-item" href="#" data-range="6M">6 Months</a>
-                      <a class="dropdown-item" href="#" data-range="1Y">1 Year</a>
-                      <a class="dropdown-item" href="#" data-range="5Y">5 Years</a>
-                      <a class="dropdown-item" href="#" data-range="MAX">Max</a>
+                <div class="d-flex justify-content-between mb-3" style="position: flex">
+                  <div class="time-range-selector">
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="timeRangeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Time Range
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="timeRangeDropdown">
+                        <a class="dropdown-item" href="#" data-range="1M">1 Month</a>
+                        <a class="dropdown-item" href="#" data-range="3M">3 Months</a>
+                        <a class="dropdown-item" href="#" data-range="6M">6 Months</a>
+                        <a class="dropdown-item" href="#" data-range="1Y">1 Year</a>
+                        <a class="dropdown-item" href="#" data-range="5Y">5 Years</a>
+                        <a class="dropdown-item" href="#" data-range="MAX">Max</a>
+                      </div>
                     </div>
                   </div>
-                </div>
+                  <h3 class="percent-change" id="percentChange">Percent Change:</h3>
+                </div>                
               </div>
             </div>
             <div class="col-sm-4">
@@ -54,12 +57,70 @@
                 <h4>Recent News:</h4>
                 <ul id="newsList"></ul>
               </div>
-              
             </div>
           </div>
       </div>
 
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-12">
+                <h3>Company Financials</h3>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col">
+                <p id="revenue">Last 4 Years Revenue:</p>
+              </div>
+              <div class="col">
+                <p id="revenue4years">Last 4 Quarters Revenue:</p>
+              </div>
+              <div class="col">
+                <p id="eps">EPS:</p>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col">
+                <p id="#">Free Cash Flow Per Share:</p>
+              </div>
+              <div class="col">
+                <p id="#">Book Value Per Share:</p>
+              </div>
+              <div class="col">
+                <p id="marketCap">Market Cap:</p>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col">
+                <p id="#">EMPTY</p>
+              </div>
+              <div class="col">
+                <p id="#">EMPTY:</p>
+              </div>
+              <div class="col">
+                <p id="#">EMPTY:</p>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col">
+                <p id="#">EMPTY:</p>
+              </div>
+              <div class="col">
+                <p id="#">EMPTY</p>
+              </div>
+              <div class="col">
+                <p id="#">EMPTY:</p>
+              </div>
+            </div>
 
+          </div>
+        </div>
+      </div>
 
 <!-- Your page content goes here -->
 

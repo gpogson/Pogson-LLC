@@ -1,14 +1,26 @@
 body {
-    background-color: #FFF6F4; /* Dark background color */
+    background-color: #fdfff4; /* Dark background color */
   }
 
-  .header-overlay {
+  .hero-overlay {
+    position: relative;
+  }
+  
+  .hero-content {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, ); /* Adjust the opacity (0.5 = 50% darkness) */
-    z-index: 2; /* Ensure the header overlay is above the hero image */
+    right: 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
   }
   
 
@@ -26,7 +38,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Rubik', sans-serif;
-    background-color: #2D4642; /* Cream background */
+    background-color: whitesmoke; /* Cream background */
   }
   
   .dashboard {
@@ -64,9 +76,9 @@ body {
   
   .stock-info {
     flex-grow: 1;
-    background-color: #2D4642; /* Lighter shade for the info panel */
+    background-color: whitesmoke; /* Lighter shade for the info panel */
     border-left: 2px solid #2D4642; /* Separator for the panel */
-    color: white;
+    color: rgba(75, 192, 192, 1);
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -142,7 +154,7 @@ hr.title {
 
 /*search bar*/
 .centered-search-bar {
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -196,4 +208,9 @@ hr.title {
 .button-image {
   width: 100%;
   height: auto;
+}
+
+
+#percentChange{
+  color: rgba(75, 192, 192, 1);
 }
