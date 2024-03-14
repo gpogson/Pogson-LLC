@@ -1,5 +1,5 @@
 body {
-    background-color: #fdfff4; /* Dark background color */
+    background-color: #fdfff4; 
   }
 
   .hero-overlay {
@@ -39,6 +39,7 @@ body {
     padding: 0;
     font-family: 'Rubik', sans-serif;
     background-color: whitesmoke; /* Cream background */
+    color: rgb(50, 161, 161);
   }
   
   .dashboard {
@@ -159,7 +160,7 @@ hr.title {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgba(255, 255, 255, 0); /* Adjust opacity here */
-  padding: 10px;
+  padding: 50px;
   border-radius: 5px;
   z-index: 2;
 }
@@ -214,6 +215,7 @@ hr.title {
   bottom: 0;
   left: 0;
   right: 0;
+  padding: 20px;
 }
 
 
