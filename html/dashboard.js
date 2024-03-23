@@ -5,8 +5,11 @@ const stockApiKey = '1c40038906c104e47ea1788c4b15237f';
 let stockData = {};
 
 // Use the searchInputValue as the ticker
-const ticker = searchInputValue;
-
+let ticker = searchInputValue;
+if (ticker == null){
+  ticker = "AAPL"; // Default to Apple if no input is provided
+}
+console.log(ticker);
 const ctx = document.getElementById('stockTitle').textContent = ticker;
 
 const getStockData = async (ticker) => {
@@ -334,6 +337,19 @@ function updatePercentChange(percentChange) {
     percentChangeNumber.style.color = 'green';
   }
 }
+
+searchInput.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    const searchText = event.target.value;
+    console.log('Search Text:', searchText);
+
+    // Construct the URL with the search input as a query parameter
+    const dashboardURL = `dashboard.html?search=${encodeURIComponent(searchText)}`;
+
+    // Redirect to the dashboard with the query parameter
+    window.location.href = dashboardURL;
+  }
+});
 
 
 
