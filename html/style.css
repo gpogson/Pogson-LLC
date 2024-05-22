@@ -222,3 +222,11 @@ hr.title {
 #percentChange{
   color: rgba(75, 192, 192, 1);
 }
+
+.center {
+  text-align: center; /* Center text and inline elements */
+}
+
+.center img {
+  margin: 0 auto; /* Center block-level elements */
+}
