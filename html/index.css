@@ -1,29 +1,28 @@
-
 /* HERO IMAGE */
 .hero-content {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px;
-    text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  text-align: center;
 }
 
 /* Add a semi-transparent overlay */
 .hero-overlay::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Adjust opacity (0.5 = 50% darkness) */
-    z-index: 1; /* Ensure the overlay is above the image */
-  }
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
 
 .hero-overlay {
   position: relative;
-  height: 100%; /* Adjust the height as needed */
+  height: 100%;
   overflow: hidden;
 }
 
@@ -33,40 +32,37 @@
   object-fit: cover;
 }
 
-#hero{
-    width: 190vh;
+#hero {
+  width: 190vh;
 }
 
-/*search bar*/
+/* Search Bar */
 .centered-search-bar {
   position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0); /* Adjust opacity here */
+  background-color: rgba(255, 255, 255, 0);
   padding: 50px;
   border-radius: 5px;
   z-index: 2;
 }
 
 .centered-search-bar input.form-control {
-  background-color: rgba(255, 255, 255, 0.7); /* Input field background opacity */
-  /* ... other input field styles ... */
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
-
-
+/* Logo */
 #logo {
   position: absolute;
-  top: 5vh; /* Adjust the top position as needed */
-  left: 50%; /* Center the logo horizontally */
-  transform: translateX(-50%); /* Center the logo horizontally */
-  z-index: 2; /* Logo is in front of the hero image */
+  top: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
   width: 45vh;
 }
 
-
-/* img buttons */
+/* Image Buttons */
 .image-button {
   overflow: hidden;
   position: relative;
@@ -74,22 +70,107 @@
   z-index: 3;
 }
 
-
-
 .image-button:hover {
   transform: translateY(-10px);
 }
 
-
 /* Default: Hide the element by default */
 .laptop-only {
-    display: none;
+  display: none;
+}
+
+/* Media Queries */
+
+/* iPhone (Small Screens) */
+@media (max-width: 767px) {
+  #hero {
+      position: relative;
+      right: 115vw;
+  }
+
+  #logo {
+      width: 20vh; /* Smaller logo for iPhone */
+      top: 2vh; /* Adjust top position for better spacing */
+  }
+
+  .centered-search-bar {
+      padding: 20px; /* Smaller padding for iPhone */
+      top: 60%; /* Adjust search bar position */
+  }
+
+  .image-button {
+    width: 80vw; /* Smaller button size for iPhones */
+    margin-top: 10px auto;
+    display: flex; /* Use Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: auto; /* You can adjust height if necessary */
+}
+
+.button-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%; /* Ensure the container spans the full width */
+  height: auto;
+}
+
+
+}
+
+/* iPad (Medium Screens) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  #hero {
+      width: 100vw;
+  }
+
+  #logo {
+      width: 30vh; /* Adjust logo size for iPad */
+      top: 4vh;
+  }
+
+  .centered-search-bar {
+      padding: 30px; /* Adjust padding for iPad */
+      top: 55%; /* Adjust search bar position */
+  }
+
+  .image-button {
+      width: 200px; /* Adjust button size for iPad */
+      margin: 15px auto;
+  }
+
+  .image-button img {
+      width: 100%;
+  }
+}
+
+/* Desktop (Larger Screens) */
+@media (min-width: 1025px) {
+  #hero {
+      width: 190vh;
+  }
+
+  #logo {
+      width: 45vh;
+  }
+
+  .centered-search-bar {
+      padding: 50px;
+      top: 50%;
+  }
+
+  .image-button {
+      width: 300px;
+  }
+
+  .image-button img {
+      width: 100%;
+  }
 }
 
 /* Media query for screens 768px and wider */
 @media (min-width: 768px) {
-    .laptop-only {
-        display: block;
-    }
+  .laptop-only {
+      display: block;
+  }
 }
-
