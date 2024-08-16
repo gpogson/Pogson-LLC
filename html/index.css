@@ -82,25 +82,21 @@
 /* Media Queries */
 
 /* iPhone (Small Screens) */
-@media (max-width: 767px) {
+@media (max-width: 933px) {
   #hero {
       position: relative;
       right: 115vw;
   }
 
   #logo {
-      width: 20vh; /* Smaller logo for iPhone */
-      top: 2vh; /* Adjust top position for better spacing */
-  }
-
-  .centered-search-bar {
-      padding: 20px; /* Smaller padding for iPhone */
-      top: 60%; /* Adjust search bar position */
+      width: 30vh; /* Smaller logo for iPhone */
+      top: 4vh; /* Adjust top position for better spacing */
   }
 
   .image-button {
     width: 80vw; /* Smaller button size for iPhones */
-    margin-top: 10px auto;
+    margin-top: 5vw;
+    margin-bottom: 10vw;
     display: flex; /* Use Flexbox */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
@@ -119,7 +115,7 @@
 }
 
 /* iPad (Medium Screens) */
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 934px) and (max-width: 1024px) {
   #hero {
       width: 100vw;
   }
