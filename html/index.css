@@ -95,12 +95,13 @@
 
   .image-button {
     width: 80vw; /* Smaller button size for iPhones */
+    
     margin-top: 5vw;
     margin-bottom: 10vw;
     display: flex; /* Use Flexbox */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
-    height: auto; /* You can adjust height if necessary */
+    height: 25vh; /* You can adjust height if necessary */
 }
 
 .button-image {
@@ -114,31 +115,6 @@
 
 }
 
-/* iPad (Medium Screens) */
-@media (min-width: 934px) and (max-width: 1024px) {
-  #hero {
-      width: 100vw;
-  }
-
-  #logo {
-      width: 30vh; /* Adjust logo size for iPad */
-      top: 4vh;
-  }
-
-  .centered-search-bar {
-      padding: 30px; /* Adjust padding for iPad */
-      top: 55%; /* Adjust search bar position */
-  }
-
-  .image-button {
-      width: 200px; /* Adjust button size for iPad */
-      margin: 15px auto;
-  }
-
-  .image-button img {
-      width: 100%;
-  }
-}
 
 /* Desktop (Larger Screens) */
 @media (min-width: 1025px) {
